@@ -4,22 +4,25 @@ import app from '../app';
 
 // GET /sum
 describe('POST /sum', () => {
-  const commonRequest = request(app).post('/sum').set('Content-Type', 'application/json');
+  
 
-  test('should respond with a Json object containing sum of a and b', async () => {
+  test('should sum respond for 11 + 15 is 26', async () => {
     const userData = {
       a: 11,
       b: 15
     };
+    const commonRequest = request(app).post('/sum').set('Content-Type', 'application/json');
     const res = await commonRequest.send(userData);
     expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty('result');
+    expect(res.body).toEqual({ result: 26 });
   });
+
 
   test('should return status 400 if a or b is missing', async () => {
     const userData = {
       a: 11
     };
+    const commonRequest = request(app).post('/sum').set('Content-Type', 'application/json');
     const res = await commonRequest.send(userData);
     expect(res.status).toBe(400);
   });
@@ -29,6 +32,7 @@ describe('POST /sum', () => {
       a: 123,
       b: 'tese'
     };
+    const commonRequest = request(app).post('/sum').set('Content-Type', 'application/json');
     const res = await commonRequest.send(userData);
     expect(res.status).toBe(400);
   });
@@ -38,6 +42,7 @@ describe('POST /sum', () => {
         a: 47,
         b: 77
     };
+    const commonRequest = request(app).post('/sum').set('Content-Type', 'application/json');
     const res = await commonRequest.send(userData);
     // Get the Content-Type header from the response
     const contentTypeHeader = res.headers['content-type'];
